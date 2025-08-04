@@ -1,6 +1,7 @@
 from fastapi import FastAPI, UploadFile, File
 from fastapi.responses import FileResponse
 from PyPDF2 import PdfMerger
+from typing import List
 import img2pdf
 import os
 import shutil
@@ -13,7 +14,7 @@ def convert_image_to_pdf(img_bytes, output_path):
         f.write(img2pdf.convert(img_bytes))
 
 @app.post("/juntar")
-async def juntar_arquivos(files: list[UploadFile] = File(...)):
+async def juntar_arquivos(files: List[UploadFile] = File(...)):
     merger = PdfMerger()
     temp_files = []
 
